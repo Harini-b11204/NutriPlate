@@ -12,10 +12,15 @@ Upload or scan your meal, and NutriPlate will:
 # **🚀 Features**
 
 📷 Food Detection – Identify multiple items from an image of your plate
+
 🧠 Classification – Deep learning models for food recognition
+
 🍏 Nutrition Estimation – Macro breakdown: calories, proteins, carbs, fats
+
 🌱 Freshness Check – Estimate how fresh the food looks
+
 💻 Interactive Web UI – Clean card-style dashboard built with HTML/CSS/JS
+
 🔄 API Support – Use /scan endpoint for programmatic access
 
 # **📂 Project Structure**
@@ -66,22 +71,33 @@ http://127.0.0.1:5000/
 ```
 # **🎯 Usage**
 Web App
+
 *Click Start Scanning
+
 *Upload a food image
+
 *Get instant nutrition insights
 
 # **🧠 Tech Stack**
 🎯Backend: Flask, Python
+
 🎯Frontend: HTML5, CSS3, Vanilla JS
+
 🎯AI Models: Food-101 classification, freshness estimation models
+
 🎯Data: Nutrition datasets
 
 # **🤝 Contributing**
 Contributions are welcome!
+
 1.Fork the repo
+
 2.Create a feature branch (git checkout -b feature-name)
+
 3.Commit changes (git commit -m "Added new feature")
+
 4.Push to branch (git push origin feature-name)
+
 5.Open a Pull Request
 
 # **📜 License**
