@@ -256,5 +256,30 @@ def debug_sample():
     }]
     return jsonify({"results": sample})
 
+
+@app.route('/debug-top5', methods=['POST'])
+def debug_top5():
+    """Accepts an uploaded image and returns classifier top-5 predictions for debugging."""
+    if 'file' not in request.files:
+        return jsonify({"error": "No file part"}), 400
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({"error": "No selected file"}), 400
+    filename = secure_filename(file.filename)
+    try:
+        with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(filename)[1]) as temp:
+            file.save(temp.name)
+            image_path = temp.name
+        # call classifier.get_topk if available
+        try:
+            from classification.classifier import get_topk
+        except Exception:
+            return jsonify({"error": "classifier.get_topk not available"}), 500
+        top5 = get_topk(image_path, k=5)
+        os.remove(image_path)
+        return jsonify({"top5": top5})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 if __name__ == "__main__":
     app.run(debug=False)

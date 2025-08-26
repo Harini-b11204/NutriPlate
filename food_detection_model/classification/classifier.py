@@ -67,3 +67,34 @@ def classify_food(image_path):
         return f'label_{idx}'
     except Exception:
         return 'unknown_food'
+
+
+def get_topk(image_path, k=5):
+    """Return list of (label, prob) for the top-k ImageNet predictions.
+
+    Each item is a dict: {"label": str, "prob": float, "idx": int}
+    Gracefully falls back if model/labels are unavailable.
+    """
+    # fallback when model not available
+    if model is None or not TORCH_AVAILABLE:
+        if idx2label:
+            return [{"label": idx2label[0], "prob": 1.0, "idx": 0}]
+        return [{"label": "unknown_food", "prob": 1.0, "idx": -1}]
+
+    try:
+        image = Image.open(image_path).convert('RGB')
+        img_t = transform(image)
+        batch_t = torch.unsqueeze(img_t, 0)
+        with torch.no_grad():
+            out = model(batch_t)
+        probs = torch.nn.functional.softmax(out, dim=1)[0]
+        topk = probs.topk(k)
+        indices = topk.indices.cpu().tolist()
+        values = topk.values.cpu().tolist()
+        res = []
+        for idx, p in zip(indices, values):
+            label = idx2label[idx] if (0 <= idx < len(idx2label)) else f'label_{idx}'
+            res.append({"label": label, "prob": float(p), "idx": int(idx)})
+        return res
+    except Exception:
+        return [{"label": "unknown_food", "prob": 1.0, "idx": -1}]
