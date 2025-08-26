@@ -1,5 +1,6 @@
-
 from flask import Flask, request, jsonify, render_template_string
+from flask_cors import CORS
+from flask_cors import CORS
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -11,6 +12,8 @@ from datetime import datetime
 
 # Flask app and version stamp
 app = Flask(__name__)
+CORS(app)
+CORS(app)  # allow all origins during testing; tighten for production
 VERSION = datetime.utcnow().isoformat()
 
 UPLOAD_HTML = '''
@@ -85,6 +88,7 @@ UPLOAD_HTML = '''
         const ingredients = document.getElementById('ingredients');
         const totalCals = document.getElementById('totalCals');
         const footer = document.getElementById('footer');
+        const API = 'https://your-backend.onrender.com';
 
         fileInput.addEventListener('change', async (e)=>{
             const f = e.target.files[0];
@@ -92,7 +96,7 @@ UPLOAD_HTML = '''
             camera.innerHTML = '<div style="padding:40px 10px;color:#4caf50;">Scanning...</div>';
             const fd = new FormData(); fd.append('file', f);
             try{
-                        const r = await fetch('/scan',{method:'POST',body:fd});
+                        const r = await fetch(`${API}/scan`, { method:'POST', body: fd });
                         console.log('[NET] /scan status', r.status, 'ok=', r.ok);
                         // If server returned non-2xx, read text and show error (avoid reading body twice)
                         if(!r.ok){

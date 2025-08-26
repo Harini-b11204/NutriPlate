@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" }
+  ],
+  "env": {
+    "BACKEND_URL": "http://127.0.0.1:5000"
+  }
+}

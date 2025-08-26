@@ -8,4 +8,7 @@ pillow
 flask
 werkzeug
 Flask==2.3.2
-gunicorn
+gunicorn -w 4 -b 0.0.0.0:$PORT food_detection_model.app.app:app
+
+const API = 'https://your-backend.onrender.com';
+const r = await fetch(`${API}/scan`, { method:'POST', body: fd });
