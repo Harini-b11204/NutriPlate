@@ -1,4 +1,4 @@
-🍽️ ## NutriPlate
+🍽️ **NutriPlate**
 
 Scan your plate. Know your nutrition. Instantly.
 
@@ -9,7 +9,7 @@ Upload or scan your meal, and NutriPlate will:
 ✅ Estimate freshness
 ✅ Provide nutritional insights (calories, protein, carbs, fats)
 
-🚀 ## Features
+🚀 **Features**
 
 📷 Food Detection – Identify multiple items from an image of your plate
 🧠 Classification – Deep learning models for food recognition
@@ -18,7 +18,7 @@ Upload or scan your meal, and NutriPlate will:
 💻 Interactive Web UI – Clean card-style dashboard built with HTML/CSS/JS
 🔄 API Support – Use /scan endpoint for programmatic access
 
-📂 ## Project Structure
+📂 **Project Structure**
 ```bash
 food_detector/
 │── app/                 # Flask app entry
@@ -39,7 +39,7 @@ food_detector/
 │── main.py               # Core orchestrator (detect + classify + nutrition)
 │── requirements.txt      # Dependencies
 ```
-⚡## Installation & Setup
+⚡**Installation & Setup**
 
 1️⃣ Clone this repo
 ```bash
@@ -64,19 +64,19 @@ python app/app.py
 ```bash
 http://127.0.0.1:5000/
 ```
-🎯 ## Usage
+🎯 **Usage**
 Web App
 *Click Start Scanning
 *Upload a food image
 *Get instant nutrition insights
 
-🧠 ## Tech Stack
+🧠 **Tech Stack**
 🎯Backend: Flask, Python
 🎯Frontend: HTML5, CSS3, Vanilla JS
 🎯AI Models: Food-101 classification, freshness estimation models
 🎯Data: Nutrition datasets
 
-🤝 Contributing
+🤝 **Contributing**
 Contributions are welcome!
 1.Fork the repo
 2.Create a feature branch (git checkout -b feature-name)
@@ -84,10 +84,10 @@ Contributions are welcome!
 4.Push to branch (git push origin feature-name)
 5.Open a Pull Request
 
-📜 License
+📜 **License**
 This project is licensed under the MIT License – feel free to use & modify.
 
-👨‍💻 Author
+👨‍💻 **Author**
 
 Developed by Harini ✨
 If you like this project, don’t forget to ⭐ the repo!
