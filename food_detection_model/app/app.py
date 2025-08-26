@@ -1,6 +1,5 @@
+
 from flask import Flask, request, jsonify, render_template_string
-from flask_cors import CORS
-from flask_cors import CORS
 import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -12,8 +11,6 @@ from datetime import datetime
 
 # Flask app and version stamp
 app = Flask(__name__)
-CORS(app)
-CORS(app)  # allow all origins during testing; tighten for production
 VERSION = datetime.utcnow().isoformat()
 
 UPLOAD_HTML = '''
@@ -88,7 +85,6 @@ UPLOAD_HTML = '''
         const ingredients = document.getElementById('ingredients');
         const totalCals = document.getElementById('totalCals');
         const footer = document.getElementById('footer');
-        const API = 'https://your-backend.onrender.com';
 
         fileInput.addEventListener('change', async (e)=>{
             const f = e.target.files[0];
@@ -96,7 +92,7 @@ UPLOAD_HTML = '''
             camera.innerHTML = '<div style="padding:40px 10px;color:#4caf50;">Scanning...</div>';
             const fd = new FormData(); fd.append('file', f);
             try{
-                        const r = await fetch(`${API}/scan`, { method:'POST', body: fd });
+                        const r = await fetch('scan',{method:'POST',body:fd});
                         console.log('[NET] /scan status', r.status, 'ok=', r.ok);
                         // If server returned non-2xx, read text and show error (avoid reading body twice)
                         if(!r.ok){
@@ -255,31 +251,6 @@ def debug_sample():
         "nutrition": {"calories": 165, "macros": {"protein": 31, "carbs": 0, "fat": 3.6}}
     }]
     return jsonify({"results": sample})
-
-
-@app.route('/debug-top5', methods=['POST'])
-def debug_top5():
-    """Accepts an uploaded image and returns classifier top-5 predictions for debugging."""
-    if 'file' not in request.files:
-        return jsonify({"error": "No file part"}), 400
-    file = request.files['file']
-    if file.filename == '':
-        return jsonify({"error": "No selected file"}), 400
-    filename = secure_filename(file.filename)
-    try:
-        with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(filename)[1]) as temp:
-            file.save(temp.name)
-            image_path = temp.name
-        # call classifier.get_topk if available
-        try:
-            from classification.classifier import get_topk
-        except Exception:
-            return jsonify({"error": "classifier.get_topk not available"}), 500
-        top5 = get_topk(image_path, k=5)
-        os.remove(image_path)
-        return jsonify({"top5": top5})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
     app.run(debug=False)
