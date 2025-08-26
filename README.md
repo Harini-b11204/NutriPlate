@@ -5,8 +5,11 @@ Scan your plate. Know your nutrition. Instantly.
 NutriPlate is a food detection and nutrition analysis app powered by computer vision + AI models.
 Upload or scan your meal, and NutriPlate will:
 ✅ Detect the food items
+
 ✅ Classify them (e.g., strawberry, rice, chicken)
+
 ✅ Estimate freshness
+
 ✅ Provide nutritional insights (calories, protein, carbs, fats)
 
 # **🚀 Features**
